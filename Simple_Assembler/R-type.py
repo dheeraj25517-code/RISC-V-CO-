@@ -12,7 +12,7 @@ def encode_r(mnemonic, rd_name, rs1_name, rs2_name):#Converts an R-type instruct
         rd=REGISTERS[rd_name]
         rs1=REGISTERS[rs1_name]
         rs2=REGISTERS[rs2_name]
-        binary_string = f7+rs2+rs1+f3+rd+op# Total bits: 7 + 5 + 5 + 3 + 5 + 7 = 32
+        binary_string = f7+rs2+rs1+f3+rd+op
         return binary_string
 
     except KeyError as e:
