@@ -56,23 +56,28 @@ The instructions were then retrieved and stored as dictionaries along with ABI n
 }"""
 
 
-3)R-type: by Dheeraj
+3)r_type: by Dheeraj
 Converts an R-type instruction into its 32-bit binary string (Example: add x1, x2, x3)
 
-4)B-type: by Rudra
+4)b_type: by Rudra
 Converts an B-type instruction into its 32-bit binary string (Example: blt rs1, rs2, imm[12:1])
 
-5)I-type: by Shubh
+5)i_type: by Shubh
 Converts an R-type instruction into its 32-bit binary string (Example: addi,x1,x2,10)
 
-6)J-type: by Shubh
+6)j_type: by Shubh
 Converts an J-type instruction into its 32-bit binary string (Example: jal,x1,-1024)
 
-7)U-type: by Rudra
+7)u_type: by Rudra
 Converts an U-type instruction into its 32-bit binary string (Example: lui,rd,15)
 
-8)S-type: by Shivam
+8)s_type: by Shivam, debugging was done by Rudra
 Converts an S-type instruction into its 32-bit binary string (Example: sw,ra,32(sp))
 
-9)Read_me.md by Shivam 
+9)Read_me.md by Shubh 
 The types here take in string input and gives a 32 bit.
+
+10)Assembler.py by Shivam and Dheeraj, testing was done by Shubh
+This file consists of the main logic
+
+Note that this code is to be run using terminal.
