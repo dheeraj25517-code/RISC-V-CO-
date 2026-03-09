@@ -17,10 +17,11 @@ def encode_s(mnemonic,rs1_name, rs2_name,imm):
 
         imm_bin=bin(val & 0xFFF)[2:].zfill(12) 
         
-        binary_string = imm_bin[0:7]+rs2+rs1+f3+imm_bin[-5::]+op  # Total=7+5+5+3+5+7=32 bits
+        binary_string = imm_bin[0:7]+rs2+rs1+f3+imm_bin[7:12]+op  # Total=7+5+5+3+5+7=32 bits
         return binary_string
 
     except KeyError as e:
         return f"Error: Unknown mnemonic or register:{e}"
 
 #print(encode_s("sw","ra",32(sp))
+
