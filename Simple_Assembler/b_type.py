@@ -15,9 +15,9 @@ def encode_b(mnemonic,rs1_name, rs2_name,imm):
 
         val=int(imm) 
 
-        imm_bin=bin(val & 0xFFF)[2:].zfill(12) 
+        imm_bin=bin(val & 0x1FFF)[2:].zfill(13) 
         
-        binary_string = imm_bin[0:7]+rs2+rs1+f3+imm_bin[-5::]+op  # Total=7+5+5+3+5+7=32 bits
+        binary_string = imm_bin[0]+imm_bin[2:8]+rs2+rs1+f3+imm_bin[8:12]+imm_bin[1]+op  # Total=7+5+5+3+5+7=32 bits
         return binary_string
 
     except KeyError as e:
@@ -26,3 +26,4 @@ def encode_b(mnemonic,rs1_name, rs2_name,imm):
     
 
 #print(encode_b("blt","a4","a5",200))
+
