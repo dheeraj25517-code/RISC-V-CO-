@@ -112,7 +112,9 @@ def pass_2(clean_lines,symbol_table):
             if rd not in REGISTERS:
                 print(f"Error at line {i+1}: Invalid register")
                 exit()
-
+            if not (0 <= imm <= 1048575):
+                print("Error at line {i+1}: Jump offset {offset} out of range")
+                exit()
             binary=encode_u(mnemonic,rd,imm)
             output_binary.append(binary)
 
