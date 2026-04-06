@@ -23,13 +23,13 @@ def decode(instr_bin, ISA):
         t = info["type"]
 
         if t == "R":
-            if info["funct3"] == funct3 and info["funct7"] == funct7:
+            if info["func3"] == funct3 and info["func7"] == funct7:
                 return {"type": "R", "op": name, "rd": rd, "rs1": rs1, "rs2": rs2}
 
         elif t == "I":
-            if info["funct3"] == funct3:
-                if "funct7" in info:
-                    if info["funct7"] != funct7:
+            if info["func3"] == funct3:
+                if "func7" in info:
+                    if info["func7"] != funct7:
                         continue
                     imm = int(instr_bin[7:12], 2)
                 else:
@@ -38,12 +38,12 @@ def decode(instr_bin, ISA):
                 return {"type": "I", "op": name, "rd": rd, "rs1": rs1, "imm": imm}
 
         elif t == "S":
-            if info["funct3"] == funct3:
+            if info["func3"] == funct3:
                 imm = sign_extend(instr_bin[0:7] + instr_bin[20:25], 12)
                 return {"type": "S", "op": name, "rs1": rs1, "rs2": rs2, "imm": imm}
 
         elif t == "B":
-            if info["funct3"] == funct3:
+            if info["func3"] == funct3:
                 imm = sign_extend(
                     instr_bin[0] +
                     instr_bin[24] +
