@@ -72,8 +72,11 @@ def execute(decoded, registers, pc, memory):
             result = rs1 >> (imm & 0x1F)
 
         elif op == "lw":
-            addr = rs1 + imm
-            result = memory.read_memory(addr, 4)
+            addr = (rs1 + imm) & 0xffffffff
+            if addr + 3 < len(memory.memory):
+                result = memory.read_memory(addr, 4)
+            else:
+                result = 0
 
         elif op == "jalr":
             result = pc + 4
@@ -90,8 +93,9 @@ def execute(decoded, registers, pc, memory):
         imm = decoded.get("imm", 0)
 
         if op == "sw":
-            addr = rs1 + imm
-            memory.write_memory(addr, rs2, 4)
+            addr = (rs1 + imm) & 0xffffffff
+            if addr + 3 < len(memory.memory):
+                memory.write_memory(addr, rs2, 4)
 
     # ================= B TYPE =================
     elif ins_type == "B":
