@@ -36,5 +36,5 @@ class Base:
 
     def dump_state(self):
         pc_bin = format(self.pc, '032b')
-        reg_bins = [format(reg, '032b') for reg in self.registers]
-        return f"{pc_bin}\n{' '.join(reg_bins)}"
+        reg_bins = [format(reg & 0xFFFFFFFF, '032b') for reg in self.registers]
+        return f"{pc_bin} {' '.join(reg_bins)}"
