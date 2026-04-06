@@ -45,37 +45,11 @@ def execute(decode,register,pc,memory):
             new_pc=(rs_1+imm)& ~1
         elif op=="lw":
             addr=rs_1+imm
-            result=memory.get(addr, 0) 
+            result=memory.read_memory(addr, 0)
+            
         
         if result is not None:
             register[decode["rd"]] = to_signed_32(result)
-
-elif ins_type=="B":
-        rs_1=register[decode["rs1"]]
-        rs_2=register[decode["rs2"]]
-        imm=decode["imm"]
-        
-        condition=False
-        if op=="beq":condition =(rs_1== rs_2)
-        elif op=="bne":condition =(rs_1!=rs_2)
-        elif op=="blt":condition =(rs_1< rs_2)
-        elif op=="bge":condition =(rs_1>= rs_2)
-        
-        if condition:
-            new_pc=pc+imm
-
-    elif ins_type =="U":
-        if op =="lui":
-            register[decode["rd"]] = decode["imm"]
-        elif op== "auipc":
-            register[decode["rd"]] = pc + decode["imm"]
-
-    elif ins_type=="J":
-        if op=="jal":
-            register[decode["rd"]]=pc+4
-            new_pc=pc+decode["imm"]
-
-    register[0]=0
     return new_pc
 
     
