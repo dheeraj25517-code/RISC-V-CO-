@@ -1,3 +1,5 @@
+from ISA_Data import ISA
+
 def sign_extend(bit_str, length):
     val = int(bit_str, 2)
     if bit_str[0] == '1':
@@ -27,15 +29,25 @@ def decode(instr_bin, ISA):
                 return {"type": "R", "op": name, "rd": rd, "rs1": rs1, "rs2": rs2}
 
         elif t == "I":
-            if info["func3"] == funct3:
-                if "func7" in info:
-                    if info["func7"] != funct7:
-                        continue
-                    imm = int(instr_bin[7:12], 2)
-                else:
-                    imm = sign_extend(instr_bin[0:12], 12)
+            if info["func3"] != funct3:
+                continue
 
-                return {"type": "I", "op": name, "rd": rd, "rs1": rs1, "imm": imm}
+            # shift instructions (slli, srli, srai)
+            if "func7" in info:
+                if funct7 != info["func7"]:
+                    continue
+                imm = int(instr_bin[7:12], 2)
+
+            else:
+                imm = sign_extend(instr_bin[0:12], 12)
+
+            return {
+                "type": "I",
+                "op": name,
+                "rd": rd,
+                "rs1": rs1,
+                "imm": imm
+            }
 
         elif t == "S":
             if info["func3"] == funct3:
