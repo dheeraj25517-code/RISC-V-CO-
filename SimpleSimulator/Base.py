@@ -1,6 +1,7 @@
 class Base:
-    def __init__(self, memory_size=65536):
+    def __init__(self, memory_size = 0x20000):
         self.registers = [0] * 32
+        self.registers[2] = 0x0000017C
         self.pc = 0
         self.memory = bytearray(memory_size)
         
@@ -35,6 +36,6 @@ class Base:
             self.memory[address + i] = (value >> (8 * i)) & 0xFF
 
     def dump_state(self):
-        pc_bin = format(self.pc, '032b')
-        reg_bins = [format(reg & 0xFFFFFFFF, '032b') for reg in self.registers]
+        pc_bin = f"0b{self.get_pc():032b}"
+        reg_bins = [f"0b{(r & 0xffffffff):032b}" for r in self.registers]
         return f"{pc_bin} {' '.join(reg_bins)}"
