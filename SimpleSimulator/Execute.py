@@ -14,7 +14,6 @@ def execute(decoded, registers, pc, memory):
     op = decoded.get("op")
     ins_type = decoded.get("type")
 
-    # ================= R TYPE =================
     if ins_type == "R":
 
         rs1 = registers[decoded["rs1"]]
@@ -45,7 +44,6 @@ def execute(decoded, registers, pc, memory):
         if result is not None:
             registers[rd] = to_signed_32(result)
 
-    # ================= I TYPE =================
     elif ins_type == "I":
 
         rs1 = registers[decoded["rs1"]]
@@ -85,7 +83,6 @@ def execute(decoded, registers, pc, memory):
         if result is not None:
             registers[rd] = to_signed_32(result)
 
-    # ================= S TYPE =================
     elif ins_type == "S":
 
         rs1 = registers[decoded["rs1"]]
@@ -97,7 +94,6 @@ def execute(decoded, registers, pc, memory):
             if addr + 3 < len(memory.memory):
                 memory.write_memory(addr, rs2, 4)
 
-    # ================= B TYPE =================
     elif ins_type == "B":
 
         rs1 = registers[decoded["rs1"]]
@@ -122,7 +118,6 @@ def execute(decoded, registers, pc, memory):
         if take:
             new_pc = pc + imm
 
-    # ================= U TYPE =================
     elif ins_type == "U":
 
         rd = decoded["rd"]
@@ -134,7 +129,6 @@ def execute(decoded, registers, pc, memory):
         elif op == "auipc":
             registers[rd] = to_signed_32(pc + imm)
 
-    # ================= J TYPE =================
     elif ins_type == "J":
 
         rd = decoded["rd"]
