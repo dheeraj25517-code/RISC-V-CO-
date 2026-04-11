@@ -53,7 +53,7 @@ def run_simulator(input_file, output_file):
                 out.write(" ".join([pc_bin] + regs) + "\n")
                 #print(decoded)
                 print("PC: ",pc)
-                trace_output.append(" ".join([pc_bin] + regs)
+                trace_output.append(" ".join([pc_bin] + regs))
                 if decoded["type"] == "B" and decoded["op"] == "beq" and int(decoded["rs1"]) == 0 and int(decoded["rs2"]) == 0 and decoded["imm"] == 0:
                     break
                 steps += 1
